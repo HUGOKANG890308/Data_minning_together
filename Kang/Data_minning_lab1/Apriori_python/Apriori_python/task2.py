@@ -94,7 +94,8 @@ def runApriori(data_iter, minSupport):
 # 打印 Task 2 結果
 def printResultsForTask2(items):
     frequent_closed_itemsets = getFrequentClosedItemsets(items)
-    with open(f"result\\{filename}_Result_file_for_Task2.txt", "w") as f:
+    with open(f"result\\Result_file_for_Task2.txt", "a") as f:
+        f.write(f"{filename} : minimum support = {minSupport}\n")
         f.write(f"{len(frequent_closed_itemsets)}\n")
         for itemset, support in sorted(frequent_closed_itemsets, key=lambda x: x[1], reverse=True):
             f.write(f"{round(support * 100, 1)}%\t{{{' ,'.join(map(str, itemset))}}}\n")
@@ -109,6 +110,7 @@ def dataFromFile(fname):
 
 if __name__ == "__main__":
     start_time = time.time()
+
     optparser = OptionParser()
     optparser.add_option(
         "-f", "--inputFile", dest="input", help="filename containing csv", default=None
@@ -117,7 +119,6 @@ if __name__ == "__main__":
         "-s", "--minSupport", dest="minS", help="minimum support value", default=0.1, type="float"
     )
     (options, args) = optparser.parse_args()
-    
     filename = options.input
     filename = filename.split("\\")[-1].split('.')[0]
 
