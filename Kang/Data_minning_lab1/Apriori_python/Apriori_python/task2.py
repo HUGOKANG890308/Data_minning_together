@@ -109,11 +109,15 @@ def dataFromFile(fname):
 
 if __name__ == "__main__":
     start_time = time.time()
-
     optparser = OptionParser()
-    optparser.add_option("-f", "--inputFile", dest="input", help="filename containing csv", default=None)
-    optparser.add_option("-s", "--minSupport", dest="minS", help="minimum support value", default=0.1, type="float")
+    optparser.add_option(
+        "-f", "--inputFile", dest="input", help="filename containing csv", default=None
+    )
+    optparser.add_option(
+        "-s", "--minSupport", dest="minS", help="minimum support value", default=0.1, type="float"
+    )
     (options, args) = optparser.parse_args()
+    
     filename = options.input
     filename = filename.split("\\")[-1].split('.')[0]
 
@@ -133,5 +137,5 @@ if __name__ == "__main__":
     end_time = time.time()
     elapsed_time = end_time - start_time
     print(f"Computation time for this task: {elapsed_time} seconds")
-    with open("result\\computation_time.txt", "a") as f:
+    with open("result\\computation_time_task2.txt", "a") as f:
         f.write(f"{filename},minSupport:{minSupport} => Computation time for this task: {round(elapsed_time, 4)} seconds\n")

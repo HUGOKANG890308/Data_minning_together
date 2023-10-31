@@ -137,5 +137,5 @@ if __name__ == "__main__":
     elapsed_time = end_time - start_time
     
     print(f"Computation time for this task: {elapsed_time} seconds")
-    with open("result\\computation_time.txt", "a") as f:
+    with open("result\\computation_time_task1.txt", "a") as f:
         f.write(f"{filename},minSupport:{minSupport} => Computation time for this task: {round(elapsed_time, 4)} seconds\n")
