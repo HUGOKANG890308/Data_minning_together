@@ -60,11 +60,9 @@ def getFrequentClosedItemsets(frequent_itemsets):
                 # 如果是，則將標記設置為False並中斷循環
                 is_closed = False
                 break
-        
         # 如果標記仍然是True，則將當前的項目集添加到頻繁閉項目集列表中
         if is_closed:
             frequent_closed_itemsets.append((itemset1, support1))
-    
     # 返回頻繁閉項目集列表
     return frequent_closed_itemsets
 
