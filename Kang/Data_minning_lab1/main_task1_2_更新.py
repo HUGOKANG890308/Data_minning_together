@@ -5,9 +5,9 @@ import os
 os.getcwd()
 # 指定檔案名和其它靜態參數
 file_data = {
-    "my_dataset\\DataA.data": [0.005, 0.001],
-    "my_dataset\\DataB.data": [0.01, 0.05],
-    "my_dataset\\DataC.data": [0.02, 0.01]
+    "my_dataset\\DataA.data": [0.002, 0.005, 0.01],
+    "my_dataset\\DataB.data": [0.015, 0.002, 0.005],
+    "my_dataset\\DataC.data": [0.01, 0.02, 0.03]
 }
 file_data = { "my_dataset\\DataA.csv": [0.005, 0.001]}
 script_name_1 = "task1.py"
