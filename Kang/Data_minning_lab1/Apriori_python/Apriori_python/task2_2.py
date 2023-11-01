@@ -3,46 +3,7 @@ from itertools import chain, combinations
 from collections import defaultdict
 from optparse import OptionParser
 import sys
-import os
-os.getcwd()
-
-# 全局變量
-total_frequent_itemsets = 0
-statistics_data = []
-
-# 生成子集
-def subsets(arr):
-    return chain(*[combinations(arr, i + 1) for i, a in enumerate(arr)])
-
-# 返回滿足最小支持度的項目集
-def returnItemsWithMinSupport(itemSet, transactionList, minSupport, freqSet):
-    _itemSet = set()
-    localSet = defaultdict(int)
-    for item in itemSet:
-        for transaction in transactionList:
-            if item.issubset(transaction):
-                freqSet[item] += 1
-                localSet[item] += 1
-    for item, count in localSet.items():
-        support = float(count) / len(transactionList)
-        if support >= minSupport:
-            _itemSet.add(item)
-    return _itemSet
-
-# 聯接集合
-def joinSet(itemSet, length):
-    return set([i.union(j) for i in itemSet for j in itemSet if len(i.union(j)) == length])
-
-# 從數據中獲取項目集和交易列表
-def getItemSetTransactionList(data_iterator):
-    transactionList = list()
-    itemSet = set()
-    for record in data_iterator:
-        transaction = frozenset(record)
-        transactionList.append(transaction)
-        for item in transaction:
-            itemSet.add(frozenset([item]))
-    return itemSet, transactionList
+from task1 import *
 
 # 獲取頻繁閉項目集
 def getFrequentClosedItemsets(frequent_itemsets):
@@ -68,29 +29,6 @@ def getFrequentClosedItemsets(frequent_itemsets):
     # 返回頻繁閉項目集列表
     return frequent_closed_itemsets
 
-
-# 運行 Apriori 算法
-def runApriori(data_iter, minSupport):
-    global total_frequent_itemsets
-    total_frequent_itemsets = 0
-    itemSet, transactionList = getItemSetTransactionList(data_iter)
-    freqSet = defaultdict(int)
-    largeSet = dict()
-    oneCSet = returnItemsWithMinSupport(itemSet, transactionList, minSupport, freqSet)
-    currentLSet = oneCSet
-    k = 2
-    while currentLSet != set([]):
-        largeSet[k - 1] = currentLSet
-        currentLSet = joinSet(currentLSet, k)
-        currentCSet = returnItemsWithMinSupport(currentLSet, transactionList, minSupport, freqSet)
-        currentLSet = currentCSet
-        total_frequent_itemsets += len(currentLSet)
-        k = k + 1
-    toRetItems = []
-    for key, value in largeSet.items():
-        toRetItems.extend([(tuple(item), float(freqSet[item]) / len(transactionList)) for item in value])
-    return sorted(toRetItems, key=lambda x: x[1])
-
 # 打印 Task 2 結果
 def printResultsForTask2(items):
     frequent_closed_itemsets = getFrequentClosedItemsets(items)
@@ -99,15 +37,7 @@ def printResultsForTask2(items):
         f.write(f"{len(frequent_closed_itemsets)}\n")
         for itemset, support in sorted(frequent_closed_itemsets, key=lambda x: x[1], reverse=True):
             f.write(f"{round(support * 100, 1)}%\t{{{' ,'.join(map(str, itemset))}}}\n")
-
-# 從文件中讀取數據
-def dataFromFile(fname):
-    with open(fname, "r") as file_iter:
-        for line in file_iter:
-            line = line.strip().rstrip(",")
-            record = frozenset(line.split(","))
-            yield record
-
+            
 if __name__ == "__main__":
     start_time = time.time()
 
@@ -120,7 +50,7 @@ if __name__ == "__main__":
     )
     (options, args) = optparser.parse_args()
     filename = options.input
-    filename = filename.split("\\")[-1].split('.')[0]
+    # filename = filename.split("\\")[-1].split('.')[0]
 
     inFile = None
     if options.input is None:
