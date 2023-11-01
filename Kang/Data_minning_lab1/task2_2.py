@@ -4,6 +4,7 @@ from collections import defaultdict
 from optparse import OptionParser
 import sys
 from task1 import *
+sys.path.append("Apriori_python\\Apriori_python")
 
 # 獲取頻繁閉項目集
 def getFrequentClosedItemsets(frequent_itemsets):
