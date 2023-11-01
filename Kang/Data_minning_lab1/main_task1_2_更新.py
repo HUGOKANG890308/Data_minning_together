@@ -2,7 +2,7 @@ from concurrent.futures import ThreadPoolExecutor
 import subprocess
 import time
 import os
-os.getcwd()
+path = os.getcwd()
 # 指定檔案名和其它靜態參數
 file_data = {
     "my_dataset\\DataA.data": [0.002, 0.005, 0.01],
@@ -16,7 +16,7 @@ script_name_2 = "task2.py"
 def run_cmd(script_name, f, s):
     cmd = f"python {script_name} -f {f} -s {s}"
     start_time = time.time()
-    subprocess.run(cmd, shell=True, cwd='c:\\Users\\User\\OneDrive\\Data_minning_together\\Kang\\Data_minning_lab1', check=True)
+    subprocess.run(cmd, shell=True, cwd='path', check=True)
     end_time = time.time()
     return end_time - start_time
 
