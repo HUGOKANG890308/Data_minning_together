@@ -10,14 +10,14 @@ file_data = {
     "my_dataset\\DataC.data": [0.02, 0.01]
 }
 
-file_data = { "my_dataset\\DataA.csv": [0.005, 0.001] }
+file_data = { "my_dataset\\DataA.data": [0.005, 0.001] }
 script_name_1 = "task1.py"
-script_name_2 = "task2.py"
+script_name_2 = "task2_2.py"
 # 定義執行命令的函數
 def run_cmd(script_name, f, s):
     cmd = f"python {script_name} -f {f} -s {s}"
     start_time = time.time()
-    subprocess.run(cmd, shell=True, cwd='c:\\Users\\User\\OneDrive\\桌面Dell\\Data_minning_together\\Kang\\Data_minning_lab1', check=True)
+    subprocess.run(cmd, shell=True, cwd='c:\\Users\\User\\OneDrive\\Data_minning_together\\Kang\\Data_minning_lab1', check=True)
     end_time = time.time()
     return end_time - start_time
 

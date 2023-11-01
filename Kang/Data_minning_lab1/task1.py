@@ -79,7 +79,7 @@ def runApriori(data_iter, minSupport):
 
     toRetItems = []
     for key, value in largeSet.items():
-        toRetItems.extend([(tuple(item), getSupport(item)) for item in value])
+        toRetItems.extend([((item), getSupport(item)) for item in value])
     return sorted(toRetItems, key=lambda x: x[1], reverse=True)  # Sort by support, from large to small
 
 # 打印結果

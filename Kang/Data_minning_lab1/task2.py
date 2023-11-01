@@ -88,7 +88,7 @@ def runApriori(data_iter, minSupport):
         k = k + 1
     toRetItems = []
     for key, value in largeSet.items():
-        toRetItems.extend([(tuple(item), float(freqSet[item]) / len(transactionList)) for item in value])
+        toRetItems.extend([(item, float(freqSet[item]) / len(transactionList)) for item in value])
     return sorted(toRetItems, key=lambda x: x[1])
 
 # 打印 Task 2 結果
