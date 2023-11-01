@@ -9,10 +9,9 @@ file_data = {
     "my_dataset\\DataB.data": [0.01, 0.05],
     "my_dataset\\DataC.data": [0.02, 0.01]
 }
-
-file_data = { "my_dataset\\DataA.data": [0.005, 0.001] }
+file_data = { "my_dataset\\DataA.csv": [0.005, 0.001]}
 script_name_1 = "task1.py"
-script_name_2 = "task2_2.py"
+script_name_2 = "task2.py"
 # 定義執行命令的函數
 def run_cmd(script_name, f, s):
     cmd = f"python {script_name} -f {f} -s {s}"

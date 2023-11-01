@@ -6,14 +6,14 @@ from optparse import OptionParser
 import sys
 
 # 統計數據變量
-total_frequent_itemsets = 0
-statistics_data = []
+total_frequent_itemsets_task1 = 0
+statistics_data_task1 = []
 # 生成子集
 def subsets(arr):
     return chain(*[combinations(arr, i + 1) for i, a in enumerate(arr)])
 
 # 返回滿足最小支持度的項目集
-def returnItemsWithMinSupport(itemSet, transactionList, minSupport, freqSet):
+def returnItemsWithminSupport_task1(itemSet, transactionList, minSupport_task1, freqSet):
     _itemSet = set()
     localSet = defaultdict(int)
     # 剪枝前的候選項目集數
@@ -28,11 +28,11 @@ def returnItemsWithMinSupport(itemSet, transactionList, minSupport, freqSet):
     candidates_after_pruning = 0
     for item, count in localSet.items():
         support = float(count) / len(transactionList)
-        if support >= minSupport:
+        if support >= minSupport_task1:
             _itemSet.add(item)
             candidates_after_pruning += 1
             
-    statistics_data.append((candidates_before_pruning, candidates_after_pruning))
+    statistics_data_task1.append((candidates_before_pruning, candidates_after_pruning))
     return _itemSet
 
 # 聯接集合，生成更大的項目集
@@ -54,23 +54,23 @@ def getItemSetTransactionList(data_iterator):
     return itemSet, transactionList
 
 # 運行 Apriori 算法
-def runApriori(data_iter, minSupport):
-    global total_frequent_itemsets
-    total_frequent_itemsets = 0
+def runApriori(data_iter, minSupport_task1):
+    global total_frequent_itemsets_task1
+    total_frequent_itemsets_task1 = 0
     itemSet, transactionList = getItemSetTransactionList(data_iter)
     freqSet = defaultdict(int)
     largeSet = dict()
-    oneCSet = returnItemsWithMinSupport(itemSet, transactionList, minSupport, freqSet)
+    oneCSet = returnItemsWithminSupport_task1(itemSet, transactionList, minSupport_task1, freqSet)
     currentLSet = oneCSet
     k = 2
     while currentLSet != set([]):
         largeSet[k - 1] = currentLSet
         currentLSet = joinSet(currentLSet, k)
-        currentCSet = returnItemsWithMinSupport(
-            currentLSet, transactionList, minSupport, freqSet
+        currentCSet = returnItemsWithminSupport_task1(
+            currentLSet, transactionList, minSupport_task1, freqSet
         )
         currentLSet = currentCSet
-        total_frequent_itemsets += len(currentLSet)
+        total_frequent_itemsets_task1 += len(currentLSet)
         k = k + 1
         
     # 計算支持度
@@ -84,16 +84,16 @@ def runApriori(data_iter, minSupport):
 
 # 打印結果
 def printResults(items):
-    global total_frequent_itemsets
+    global total_frequent_itemsets_task1
     with open(f"result\\Result_file1.txt", "a") as f1, open(f"result\\Result_file2.txt", "a") as f2:
-        f1.write(f"{filename} : minimum support = {minSupport}\n")
+        f1.write(f"{filename} : minimum support = {minSupport_task1}\n")
         # 已經排序
         for item, support in items:  
             # \t 代表一個制表符（Tab字符），用來對齊
             f1.write(f"{round(support*100,4)}%\t{{{' ,'.join(map(str, item))}}}\n")
         
-        f2.write(f"total_frequent_itemsets:{total_frequent_itemsets}\n")
-        for index, (before, after) in enumerate(statistics_data, 1):
+        f2.write(f"total_frequent_itemsets_task1:{total_frequent_itemsets_task1}\n")
+        for index, (before, after) in enumerate(statistics_data_task1, 1):
             f2.write(f"{index}\t{before}\t{after}\n")
 
             
@@ -113,7 +113,7 @@ if __name__ == "__main__":
         "-f", "--inputFile", dest="input", help="filename containing csv", default=None
     )
     optparser.add_option(
-        "-s", "--minSupport", dest="minS", help="minimum support value", default=0.1, type="float"
+        "-s", "--minSupport_task1", dest="minS", help="minimum support value", default=0.1, type="float"
     )
     (options, args) = optparser.parse_args()
     filename = options.input
@@ -129,8 +129,8 @@ if __name__ == "__main__":
     else:
         print("沒有指定數據集文件名，系統將退出\n")
         sys.exit("系統將退出")
-    minSupport = options.minS
-    items = runApriori(inFile, minSupport)
+    minSupport_task1 = options.minS
+    items = runApriori(inFile, minSupport_task1)
     printResults(items)
     
     end_time = time.time()
@@ -138,4 +138,4 @@ if __name__ == "__main__":
     
     print(f"Computation time for this task: {elapsed_time} seconds")
     with open("result\\computation_time_task1.txt", "a") as f:
-        f.write(f"{filename},minSupport:{minSupport} => Computation time for this task: {round(elapsed_time, 4)} seconds\n")
+        f.write(f"{filename},minSupport_task1:{minSupport_task1} => Computation time for this task: {round(elapsed_time, 4)} seconds\n")

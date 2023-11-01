@@ -7,15 +7,15 @@ import os
 os.getcwd()
 
 # 全局變量
-total_frequent_itemsets = 0
-statistics_data = []
+total_frequent_itemsets_task2 = 0
+statistics_data_task2 = []
 
 # 生成子集
 def subsets(arr):
     return chain(*[combinations(arr, i + 1) for i, a in enumerate(arr)])
 
 # 返回滿足最小支持度的項目集
-def returnItemsWithMinSupport(itemSet, transactionList, minSupport, freqSet):
+def returnItemsWithminSupport_task2(itemSet, transactionList, minSupport_task2, freqSet):
     _itemSet = set()
     localSet = defaultdict(int)
     for item in itemSet:
@@ -25,7 +25,7 @@ def returnItemsWithMinSupport(itemSet, transactionList, minSupport, freqSet):
                 localSet[item] += 1
     for item, count in localSet.items():
         support = float(count) / len(transactionList)
-        if support >= minSupport:
+        if support >= minSupport_task2:
             _itemSet.add(item)
     return _itemSet
 
@@ -70,21 +70,21 @@ def getFrequentClosedItemsets(frequent_itemsets):
 
 
 # 運行 Apriori 算法
-def runApriori(data_iter, minSupport):
-    global total_frequent_itemsets
-    total_frequent_itemsets = 0
+def runApriori(data_iter, minSupport_task2):
+    global total_frequent_itemsets_task2
+    total_frequent_itemsets_task2 = 0
     itemSet, transactionList = getItemSetTransactionList(data_iter)
     freqSet = defaultdict(int)
     largeSet = dict()
-    oneCSet = returnItemsWithMinSupport(itemSet, transactionList, minSupport, freqSet)
+    oneCSet = returnItemsWithminSupport_task2(itemSet, transactionList, minSupport_task2, freqSet)
     currentLSet = oneCSet
     k = 2
     while currentLSet != set([]):
         largeSet[k - 1] = currentLSet
         currentLSet = joinSet(currentLSet, k)
-        currentCSet = returnItemsWithMinSupport(currentLSet, transactionList, minSupport, freqSet)
+        currentCSet = returnItemsWithminSupport_task2(currentLSet, transactionList, minSupport_task2, freqSet)
         currentLSet = currentCSet
-        total_frequent_itemsets += len(currentLSet)
+        total_frequent_itemsets_task2 += len(currentLSet)
         k = k + 1
     toRetItems = []
     for key, value in largeSet.items():
@@ -95,7 +95,7 @@ def runApriori(data_iter, minSupport):
 def printResultsForTask2(items):
     frequent_closed_itemsets = getFrequentClosedItemsets(items)
     with open(f"result\\Result_file_for_Task2.txt", "a") as f:
-        f.write(f"{filename} : minimum support = {minSupport}\n")
+        f.write(f"{filename} : minimum support = {minSupport_task2}\n")
         f.write(f"{len(frequent_closed_itemsets)}\n")
         for itemset, support in sorted(frequent_closed_itemsets, key=lambda x: x[1], reverse=True):
             f.write(f"{round(support * 100, 1)}%\t{{{' ,'.join(map(str, itemset))}}}\n")
@@ -116,7 +116,7 @@ if __name__ == "__main__":
         "-f", "--inputFile", dest="input", help="filename containing csv", default=None
     )
     optparser.add_option(
-        "-s", "--minSupport", dest="minS", help="minimum support value", default=0.1, type="float"
+        "-s", "--minSupport_task2", dest="minS", help="minimum support value", default=0.1, type="float"
     )
     (options, args) = optparser.parse_args()
     filename = options.input
@@ -131,12 +131,12 @@ if __name__ == "__main__":
         print("沒有指定數據集文件名，系統將退出")
         sys.exit("系統將退出")
 
-    minSupport = options.minS
-    items = runApriori(inFile, minSupport)
+    minSupport_task2 = options.minS
+    items = runApriori(inFile, minSupport_task2)
     printResultsForTask2(items)
 
     end_time = time.time()
     elapsed_time = end_time - start_time
     print(f"Computation time for this task: {elapsed_time} seconds")
     with open("result\\computation_time_task2.txt", "a") as f:
-        f.write(f"{filename},minSupport:{minSupport} => Computation time for this task: {round(elapsed_time, 4)} seconds\n")
+        f.write(f"{filename},minSupport_task2:{minSupport_task2} => Computation time for this task: {round(elapsed_time, 4)} seconds\n")
