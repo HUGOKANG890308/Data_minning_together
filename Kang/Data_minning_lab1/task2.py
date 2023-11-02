@@ -94,7 +94,7 @@ def runApriori(data_iter, minSupport_task2):
 # 打印 Task 2 結果
 def printResultsForTask2(items):
     frequent_closed_itemsets = getFrequentClosedItemsets(items)
-    with open(f"result\\Result_file_for_Task2.txt", "a") as f:
+    with open(f'result\\task2\\Result_file1\\task2_{filename}_{minSupport_task2}.txt', "w") as f:
         f.write(f"{filename} : minimum support = {minSupport_task2}\n")
         f.write(f"{len(frequent_closed_itemsets)}\n")
         for itemset, support in sorted(frequent_closed_itemsets, key=lambda x: x[1], reverse=True):
@@ -138,5 +138,5 @@ if __name__ == "__main__":
     end_time = time.time()
     elapsed_time = end_time - start_time
     print(f"Computation time for this task: {elapsed_time} seconds")
-    with open("result\\computation_time_task2.txt", "a") as f:
+    with open("result\\task2\\computation_time_task2.txt", "a") as f:
         f.write(f"{filename},minSupport_task2:{minSupport_task2} => Computation time for this task: {round(elapsed_time, 4)} seconds\n")

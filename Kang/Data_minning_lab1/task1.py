@@ -85,12 +85,12 @@ def runApriori(data_iter, minSupport_task1):
 # 打印結果
 def printResults(items):
     global total_frequent_itemsets_task1
-    with open(f"result\\Result_file1.txt", "a") as f1, open(f"result\\Result_file2.txt", "a") as f2:
+    with open(f"result\\task1\\Result_file1\\step2_task1_{filename}_{minSupport_task1}.txt", "w") as f1, open(f"result\\task1\\Result_file2\\step2_task2_{filename}_{minSupport_task1}.txt", "w") as f2:
         f1.write(f"{filename} : minimum support = {minSupport_task1}\n")
         # 已經排序
         for item, support in items:  
             # \t 代表一個制表符（Tab字符），用來對齊
-            f1.write(f"{round(support*100,4)}%\t{{{' ,'.join(map(str, item))}}}\n")
+            f1.write(f"{round(support*100,4)}\t{{{' ,'.join(map(str, item))}}}\n")
         
         f2.write(f"total_frequent_itemsets_task1:{total_frequent_itemsets_task1}\n")
         for index, (before, after) in enumerate(statistics_data_task1, 1):
@@ -137,5 +137,5 @@ if __name__ == "__main__":
     elapsed_time = end_time - start_time
     
     print(f"Computation time for this task: {elapsed_time} seconds")
-    with open("result\\computation_time_task1.txt", "a") as f:
+    with open("result\\task1\\computation_time_task1.txt", "w") as f:
         f.write(f"{filename},minSupport_task1:{minSupport_task1} => Computation time for this task: {round(elapsed_time, 4)} seconds\n")
