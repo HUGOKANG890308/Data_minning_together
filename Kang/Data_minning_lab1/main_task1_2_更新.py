@@ -37,6 +37,6 @@ with ThreadPoolExecutor() as executor:
             if time1 and time2:
                 ratio = (time2 / time1) * 100
                 print(f"執行時間比例（{f}, 支持度 {s}）: {ratio}%")
-                with open(f"result\\Result_file_for_time_ratio.txt", "a") as f1:
+                with open(f"result\\output_in_step2\\Result_file_for_time_ratio.txt", "a") as f1:
                     f1.write(f"{f}C omputation time for Task 1: {time1} seconds \n")
                     f1.write(f"執行時間比例（{f}, 支持度 {s}）: Ratio of computation time compared to that of Task 1: {ratio}% \n")
