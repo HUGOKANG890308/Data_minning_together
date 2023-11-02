@@ -9,7 +9,6 @@ file_data = {
     "my_dataset\\DataB.data": [0.015, 0.002, 0.005],
     "my_dataset\\DataC.data": [0.01, 0.02, 0.03]
 }
-file_data = { "my_dataset\\DataA.csv": [0.005, 0.001]}
 script_name_1 = "task1.py"
 script_name_2 = "task2.py"
 # 定義執行命令的函數
@@ -19,11 +18,8 @@ def run_cmd(script_name, f, s):
     subprocess.run(cmd, shell=True, cwd=path, check=True)
     end_time = time.time()
     return end_time - start_time
-for f, support_values in file_data.items():
-        names = f.split("\\")[-1].split(".")[0]
-        print(f"檔案名: {names}")
-        for s in support_values:
-            print(run_cmd, script_name_1, f, s)
+
+
 # 使用ThreadPoolExecutor進行多線程執行
 with ThreadPoolExecutor() as executor:
     for f, support_values in file_data.items():
@@ -44,3 +40,25 @@ with ThreadPoolExecutor() as executor:
                 with open(f"result\\output_in_step2\\Result_file_for_time_ratio.txt", "a") as f1:
                     f1.write(f"{f}C omputation time for Task 1: {time1} seconds \n")
                     f1.write(f"執行時間比例（{f}, 支持度 {s}）: Ratio of computation time compared to that of Task 1: {ratio}% \n")
+
+'''
+python task1.py -f my_dataset\DataA.data -s 0.002
+python task2.py -f my_dataset\DataA.data -s 0.002
+python task1.py -f my_dataset\DataA.data -s 0.005
+python task2.py -f my_dataset\DataA.data -s 0.005
+python task1.py -f my_dataset\DataA.data -s 0.01
+python task2.py -f my_dataset\DataA.data -s 0.01
+python task1.py -f my_dataset\DataB.data -s 0.015
+python task2.py -f my_dataset\DataB.data -s 0.015
+python task1.py -f my_dataset\DataB.data -s 0.002
+python task2.py -f my_dataset\DataB.data -s 0.002
+python task1.py -f my_dataset\DataB.data -s 0.005
+python task2.py -f my_dataset\DataB.data -s 0.005
+python task1.py -f my_dataset\DataC.data -s 0.01
+python task2.py -f my_dataset\DataC.data -s 0.01
+python task1.py -f my_dataset\DataC.data -s 0.02
+python task2.py -f my_dataset\DataC.data -s 0.02
+python task1.py -f my_dataset\DataC.data -s 0.03
+python task2.py -f my_dataset\DataC.data -s 0.03
+
+'''
