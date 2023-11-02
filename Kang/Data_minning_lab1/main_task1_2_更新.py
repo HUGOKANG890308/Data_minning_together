@@ -16,10 +16,14 @@ script_name_2 = "task2.py"
 def run_cmd(script_name, f, s):
     cmd = f"python {script_name} -f {f} -s {s}"
     start_time = time.time()
-    subprocess.run(cmd, shell=True, cwd='path', check=True)
+    subprocess.run(cmd, shell=True, cwd=path, check=True)
     end_time = time.time()
     return end_time - start_time
-
+for f, support_values in file_data.items():
+        names = f.split("\\")[-1].split(".")[0]
+        print(f"檔案名: {names}")
+        for s in support_values:
+            print(run_cmd, script_name_1, f, s)
 # 使用ThreadPoolExecutor進行多線程執行
 with ThreadPoolExecutor() as executor:
     for f, support_values in file_data.items():
