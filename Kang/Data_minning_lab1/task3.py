@@ -53,7 +53,7 @@ def dataFromFile(fname):
 # 打印結果
 def printResults(frequent_itemsets_task3, filename, minSupport_task3):
     # 結果輸出路徑可能需要根據您的文件結構進行調整
-    output_path = f"result\output_in_step3\task1\\result_task3_{filename}_{minSupport_task3}.txt"
+    output_path = f"script_nameresult\\output_in_step3\\task1\\result_task3_{filename}_{minSupport_task3}.txt"
     with open(output_path, "w") as f:
         for itemset in frequent_itemsets_task3.itertuples():
             # 頻繁項目集和支持度
@@ -91,6 +91,6 @@ if __name__ == "__main__":
     end_time = time.time()
     elapsed_time_task3 = end_time - start_time
     print(f"Computation time for this task: {elapsed_time_task3} seconds")
-    computation_time_path = "result\output_in_step3\task1\\computation_time_task3.txt"
+    computation_time_path = "script_nameresult\\output_in_step3\\task1\\computation_time_task3.txt"
     with open(computation_time_path, "a") as f:
         f.write(f"{csv_data_file},minSupport:{minSupport_task3} => Computation time for this task: {round(elapsed_time_task3, 4)} seconds\n")
