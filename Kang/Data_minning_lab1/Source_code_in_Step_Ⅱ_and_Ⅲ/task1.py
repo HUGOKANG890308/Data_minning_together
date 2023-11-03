@@ -1,10 +1,10 @@
-
 import time
 from itertools import chain, combinations
 from collections import defaultdict
 from optparse import OptionParser
 import sys
-
+import os
+os.chdir("C:\\Users\\user\\Desktop\\Kang\\Data_minning_lab1")
 # 統計數據變量
 total_frequent_itemsets_task1 = 0
 statistics_data_task1 = []

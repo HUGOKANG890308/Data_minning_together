@@ -4,7 +4,9 @@ import sys
 from mlxtend.frequent_patterns import fpgrowth
 from mlxtend.preprocessing import TransactionEncoder
 import pandas as pd
+
 import os
+os.chdir("C:\\Users\\user\\Desktop\\Kang\\Data_minning_lab1")
 # 從數據中獲取交易列表
 def getTransactionList(data_iterator):
     transactionList = []

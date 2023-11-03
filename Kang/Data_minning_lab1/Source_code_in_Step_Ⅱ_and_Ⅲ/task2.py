@@ -4,7 +4,7 @@ from collections import defaultdict
 from optparse import OptionParser
 import sys
 import os
-os.getcwd()
+os.chdir("C:\\Users\\user\\Desktop\\Kang\\Data_minning_lab1")
 
 # 全局變量
 total_frequent_itemsets_task2 = 0
