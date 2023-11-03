@@ -6,9 +6,9 @@ import time
 path = os.getcwd()
 # 指定檔案名和其它靜態參數
 file_data = {
-    "my_dataset\\DataA.data": [0.002, 0.005, 0.01],
-    "my_dataset\\DataB.data": [0.015, 0.002, 0.005],
-    "my_dataset\\DataC.data": [0.01, 0.02, 0.03]
+    "Datasets\\DataA.data": [0.002, 0.005, 0.01],
+    "Datasets\\DataB.data": [0.015, 0.002, 0.005],
+    "Datasets\\DataC.data": [0.01, 0.02, 0.03]
 }
 script_name = "task3.py"
 
