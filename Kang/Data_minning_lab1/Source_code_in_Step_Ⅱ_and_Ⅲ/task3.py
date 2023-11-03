@@ -95,7 +95,7 @@ def dataFromFile(fname):
 # 打印結果
 def printResults(frequent_itemsets_task3, filename, minSupport_task3):
     # 結果輸出路徑可能需要根據您的文件結構進行調整
-    output_path = f"result\\output_in_step3\\task1\\step_task3_{filename}_{minSupport_task3}.txt"
+    output_path = f"output_in_step3\\task1\\step_task3_{filename}_{minSupport_task3}.txt"
     with open(output_path, "w") as f:
         for itemset in frequent_itemsets_task3.itertuples():
             # 頻繁項目集和支持度
@@ -123,7 +123,7 @@ if __name__ == "__main__":
         sys.exit("System will exit")
 
     raw_data_file = options.input
-    output_dir = "result\\output_in_step3"  # 指定輸出目錄
+    output_dir = "output_in_step3"  # 指定輸出目錄
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)  # 如果目錄不存在，則創建它
 
