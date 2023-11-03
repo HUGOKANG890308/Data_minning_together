@@ -9,10 +9,7 @@ file_data = {
     "Datasets\\DataB.data": [0.015, 0.002, 0.005],
     "Datasets\\DataC.data": [0.01, 0.02, 0.03]
 }
-file_data = {
 
-    "Datasets\\DataA.data": [0.015]
-}
 
 script_name_1 = "Source_code_in_Step_Ⅱ_and_Ⅲ\\task1.py"
 script_name_2 = "Source_code_in_Step_Ⅱ_and_Ⅲ\\task2.py"
