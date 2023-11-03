@@ -4,7 +4,7 @@ from collections import defaultdict
 from optparse import OptionParser
 import sys
 import os
-os.chdir("..")
+
 
 # 全局變量
 total_frequent_itemsets_task2 = 0

@@ -4,7 +4,7 @@ from collections import defaultdict
 from optparse import OptionParser
 import sys
 import os
-os.chdir("..")
+
 # 統計數據變量
 total_frequent_itemsets_task1 = 0
 statistics_data_task1 = []
@@ -81,7 +81,6 @@ def runApriori(data_iter, minSupport_task1):
     for key, value in largeSet.items():
         toRetItems.extend([((item), getSupport(item)) for item in value])
     return sorted(toRetItems, key=lambda x: x[1], reverse=True)  # Sort by support, from large to small
-
 # 打印結果
 def printResults(items):
     global total_frequent_itemsets_task1

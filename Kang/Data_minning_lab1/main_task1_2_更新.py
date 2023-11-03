@@ -13,8 +13,9 @@ file_data = {
 
     "Datasets\\DataA.data": [0.015]
 }
-script_name_1 = "task1.py"
-script_name_2 = "task2.py"
+
+script_name_1 = "Source_code_in_Step_Ⅱ_and_Ⅲ\\task1.py"
+script_name_2 = "Source_code_in_Step_Ⅱ_and_Ⅲ\\task2.py"
 # 定義執行命令的函數
 def run_cmd(script_name, f, s):
     cmd = f"python {script_name} -f {f} -s {s}"

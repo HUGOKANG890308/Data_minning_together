@@ -19,7 +19,7 @@ def run_cmd(script_name, f, s):
     # 獲取無擴展名的文件名
     base_name = os.path.splitext(file_name)[0]
     # 構造 CSV 文件的完整路徑
-    csv_file = os.path.join('result\\output_in_step3', f"{base_name}.csv")
+    csv_file = os.path.join('output_in_step3', f"{base_name}.csv")
     cmd = f"python {script_name} -f {f} -c {csv_file} -s {s}"
     print(cmd)
     start_time = time.time()
