@@ -11,7 +11,7 @@ file_data = {
 }
 file_data = {
 
-    "Datasets\\DataC.csv": [0.01, 0.02, 0.03]
+    "Datasets\\DataA.data": [0.015]
 }
 script_name_1 = "task1.py"
 script_name_2 = "task2.py"
