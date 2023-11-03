@@ -5,13 +5,8 @@ import os
 path = os.getcwd()
 # 指定檔案名和其它靜態參數
 file_data = {
-    "my_dataset\\DataA.data": [0.002, 0.005, 0.01],
-    "my_dataset\\DataB.data": [0.015, 0.002, 0.005],
-    "my_dataset\\DataC.data": [0.01, 0.02, 0.03]
-}
-file_data = {
+    "my_dataset\\DataB.csv": [0.015, 0.002, 0.005]
 
-    "my_dataset\\DataC.csv": [0.01, 0.02, 0.03]
 }
 script_name_1 = "task1.py"
 script_name_2 = "task2.py"
@@ -46,7 +41,8 @@ with ThreadPoolExecutor() as executor:
                     f1.write(f"執行時間比例（{f}, 支持度 {s}）: Ratio of computation time compared to that of Task 1: {ratio}% \n")
 
 '''
-D
+python task1.py -f my_dataset\DataA.data -s 0.002
+python task2.py -f my_dataset\DataA.data -s 0.002
 python task1.py -f my_dataset\DataA.data -s 0.005
 python task2.py -f my_dataset\DataA.data -s 0.005
 python task1.py -f my_dataset\DataA.data -s 0.01
@@ -63,24 +59,5 @@ python task1.py -f my_dataset\DataC.data -s 0.02
 python task2.py -f my_dataset\DataC.data -s 0.02
 python task1.py -f my_dataset\DataC.data -s 0.03
 python task2.py -f my_dataset\DataC.data -s 0.03
-
-python task1.py -f my_dataset\DataA.csv -s 0.002
-python task2.py -f my_dataset\DataA.csv -s 0.002
-python task1.py -f my_dataset\DataA.csv -s 0.005
-python task2.py -f my_dataset\DataA.csv -s 0.005
-python task1.py -f my_dataset\DataA.csv -s 0.01
-python task2.py -f my_dataset\DataA.csv -s 0.01
-python task1.py -f my_dataset\DataB.csv -s 0.015
-python task2.py -f my_dataset\DataB.csv -s 0.015
-python task1.py -f my_dataset\DataB.csv -s 0.002
-python task2.py -f my_dataset\DataB.csv -s 0.002
-python task1.py -f my_dataset\DataB.csv -s 0.005
-python task2.py -f my_dataset\DataB.csv -s 0.005
-python task1.py -f my_dataset\DataC.csv -s 0.01
-python task2.py -f my_dataset\DataC.csv -s 0.01
-python task1.py -f my_dataset\DataC.csv -s 0.02
-python task2.py -f my_dataset\DataC.csv -s 0.02
-python task1.py -f my_dataset\DataC.csv -s 0.03
-python task2.py -f my_dataset\DataC.csv -s 0.03
 
 '''

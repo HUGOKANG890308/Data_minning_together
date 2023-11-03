@@ -118,7 +118,6 @@ if __name__ == "__main__":
     (options, args) = optparser.parse_args()
     filename = options.input
     filename = filename.split("\\")[-1].split('.')[0]
-    
     inFile = None
     if options.input is None:
         # 從標準輸入讀取
@@ -132,10 +131,9 @@ if __name__ == "__main__":
     minSupport_task1 = options.minS
     items = runApriori(inFile, minSupport_task1)
     printResults(items)
-    
     end_time = time.time()
     elapsed_time = end_time - start_time
     
     print(f"Computation time for this task: {elapsed_time} seconds")
-    with open("result\\output_in_step2\\task1\\computation_time_task1.txt", "w") as f:
+    with open("result\\output_in_step2\\task1\\computation_time_task1.txt", "a") as f:
         f.write(f"{filename},minSupport_task1:{minSupport_task1} => Computation time for this task: {round(elapsed_time, 4)} seconds\n")
