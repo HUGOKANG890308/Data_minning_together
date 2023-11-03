@@ -103,7 +103,7 @@ def dataFromFile(fname):
         for line in file_iter:
             line = line.strip().rstrip(",")
             # 從第三個元素到列表末尾
-            line =','.join(line.split(',')[2:]) 
+            line =','.join(line.split(',')[3:]) 
             record = frozenset(line.split(","))
             yield record
 

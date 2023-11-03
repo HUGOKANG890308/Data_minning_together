@@ -5,7 +5,7 @@ import os
 path = os.getcwd()
 # 指定檔案名和其它靜態參數
 file_data = {
-    "my_dataset\\DataC.csv": [0.01, 0.02, 0.03]
+    "my_dataset\\DataC.csv": [0.01]
 }
 script_name_1 = "task1.py"
 script_name_2 = "task2.py"

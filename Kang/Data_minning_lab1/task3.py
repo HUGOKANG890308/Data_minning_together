@@ -1,51 +1,96 @@
+import time
+from optparse import OptionParser
+import sys
 from mlxtend.frequent_patterns import fpgrowth
 from mlxtend.preprocessing import TransactionEncoder
 import pandas as pd
-from task1 import *
 
-def run_fp_growth(transactions, min_support):
-    # 將交易數據轉換為one-hot編碼的DataFrame
+# 從數據中獲取交易列表
+def getTransactionList(data_iterator):
+    transactionList = []
+    for record in data_iterator:
+        transaction = list(record)
+        transactionList.append(transaction)
+    return transactionList
+
+# 運行 FP-Growth 算法
+def runFPGrowth(transactionList, minSupport_task3):
     te = TransactionEncoder()
-    te_ary = te.fit(transactions).transform(transactions)
+    te_ary = te.fit(transactionList).transform(transactionList)
     df = pd.DataFrame(te_ary, columns=te.columns_)
+    # 使用 FP-Growth 算法找出頻繁項目集
+    frequent_itemsets_task3 = fpgrowth(df, min_support=minSupport_task3, use_colnames=True)
+    return frequent_itemsets_task3
+
+def convertToCSV(input_file_path, output_csv_path):
+    """
+    轉換原始數據文件到 CSV 格式。
+    :param input_file_path: 原始數據文件的路徑。
+    :param output_csv_path: 要生成的 CSV 文件的路徑。
     
-    # 使用FP-growth算法找到頻繁項目集
-    frequent_itemsets = fpgrowth(df, min_support=min_support, use_colnames=True)
-    
-    # 返回頻繁項目集
-    return frequent_itemsets
+    使用範例：
+    convertToCSV('path_to_your_input_file.txt', 'output_data.csv')
+    """
+    with open(input_file_path, 'r') as infile, open(output_csv_path, 'w') as outfile:
+        for line in infile:
+            # 假設每個項目由空格分隔，可以根據需要修改分隔符
+            line_items = line.strip().split(',')
+            # 將項目連接成以逗號分隔的字符串
+            csv_line = ','.join(line_items)
+            # 寫入到 CSV 文件
+            outfile.write(csv_line + '\n')
+
+
+
+# 從文件中讀取數據
+def dataFromFile(fname):
+    file_iter = open(fname, 'r')
+    for line in file_iter:
+        line = line.strip().rstrip(",")
+        record = line.split(',')[3:]  # 從第三個元素到列表末尾
+        yield record
+
+# 打印結果
+def printResults(frequent_itemsets_task3, filename, minSupport_task3):
+    # 結果輸出路徑可能需要根據您的文件結構進行調整
+    output_path = f"result\output_in_step3\task1\\result_task3_{filename}_{minSupport_task3}.txt"
+    with open(output_path, "w") as f:
+        for itemset in frequent_itemsets_task3.itertuples():
+            # 頻繁項目集和支持度
+            f.write(f"{round(itemset.support * 100, 4)}\t{{{' ,'.join(itemset.itemsets)}}}\n")
+            
 
 if __name__ == "__main__":
     start_time = time.time()
 
     optparser = OptionParser()
     optparser.add_option(
-        "-f", "--inputFile", dest="input", help="filename containing csv", default=None
+        "-f", "--inputFile", dest="input", help="filename containing raw data", default=None
     )
     optparser.add_option(
-        "-s", "--minSupport_task1", dest="minS", help="minimum support value", default=0.1, type="float"
+        "-c", "--csvFile", dest="csv", help="filename to save CSV data", default="output_data.csv"
+    )
+    optparser.add_option(
+        "-s", "--minSupport", dest="minS", help="minimum support value", default=0.1, type="float"
     )
     (options, args) = optparser.parse_args()
-    filename = options.input
-    filename = filename.split("\\")[-1].split('.')[0]
-    inFile = None
+
     if options.input is None:
-        # 從標準輸入讀取
-        inFile = sys.stdin
-    elif options.input is not None:
-        # 從文件讀取
-        inFile = dataFromFile(options.input)
-    else:
-        print("沒有指定數據集文件名，系統將退出\n")
-        sys.exit("系統將退出")
-        
-    minSupport_task1 = options.minS
-    items = runApriori(inFile, minSupport_task1)
-    printResults(items)
-    
+        print("No dataset filename specified, system will exit.")
+        sys.exit("System will exit")
+
+    raw_data_file = options.input
+    csv_data_file = options.csv
+    minSupport_task3 = options.minS
+
+    convertToCSV(raw_data_file, csv_data_file)
+
+    transactions = getTransactionList(dataFromFile(csv_data_file))
+    frequent_itemsets_task3 = runFPGrowth(transactions, minSupport_task3)
+    printResults(frequent_itemsets_task3, csv_data_file, minSupport_task3)
     end_time = time.time()
-    elapsed_time = end_time - start_time
-    
-    print(f"Computation time for this task: {elapsed_time} seconds")
-    with open("result\\computation_time_task1.txt", "a") as f:
-        f.write(f"{filename},minSupport_task1:{minSupport_task1} => Computation time for this task: {round(elapsed_time, 4)} seconds\n")
+    elapsed_time_task3 = end_time - start_time
+    print(f"Computation time for this task: {elapsed_time_task3} seconds")
+    computation_time_path = "result\output_in_step3\task1\\computation_time_task3.txt"
+    with open(computation_time_path, "a") as f:
+        f.write(f"{csv_data_file},minSupport:{minSupport_task3} => Computation time for this task: {round(elapsed_time_task3, 4)} seconds\n")
