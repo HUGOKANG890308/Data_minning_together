@@ -19,6 +19,7 @@ def run_cmd(script_name, f, s):
     # 構造 CSV 文件的完整路徑
     csv_file = os.path.join('result\\output_in_step3', f"{base_name}.csv")
     cmd = f"python {script_name} -f {f} -c {csv_file} -s {s}"
+    print(cmd)
     start_time = time.time()
     subprocess.run(cmd, shell=True, cwd=path, check=True)
     end_time = time.time()
