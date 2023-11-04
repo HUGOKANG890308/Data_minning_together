@@ -84,7 +84,7 @@ def runApriori(data_iter, minSupport_task1):
 # 打印結果
 def printResults(items):
     global total_frequent_itemsets_task1
-    with open(f"output_in_step2\\task1\\Result_file1\\step2_task1_{filename}_{minSupport_task1}.txt", "w") as f1, open(f"output_in_step2\\task1\\Result_file2\\step2_task2_{filename}_{minSupport_task1}.txt", "w") as f2:
+    with open(f"output_in_step2\\task1\\Result_file1\\step2_task1_{filename}_{minSupport_task1}.txt", "w") as f1, open(f"output_in_step2\\task1\\Result_file2\\step2_task1_{filename}_{minSupport_task1}.txt", "w") as f2:
         f1.write(f"{filename} : minimum support = {minSupport_task1}\n")
         # 已經排序
         for item, support in items:  
